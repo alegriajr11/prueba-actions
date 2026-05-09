@@ -48,7 +48,7 @@ jobs:
         run: npm run build
 
       - name: Deploy a Netlify
-        run: netlify deploy --prod --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_TOKEN }}
+        run: netlify deploy --prod --dir=dist/actions-prueba/browser --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_TOKEN }}
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
