@@ -48,10 +48,12 @@ jobs:
         run: npm run build
 
       - name: Deploy a Netlify
-        run: netlify deploy --prod --dir=dist/actions-prueba/browser --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_TOKEN }}
-        env:
+        run: |
+          command -v netlify || npm install -g netlify-cli
+          netlify deploy --dir=dist/actions-prueba/browser --prod --message="Deploy desde GitHub Actions"
+        env: 
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
 
       - name: Finalizar Trabajo
         run: echo "Trabajo de CI completado exitosamente"
