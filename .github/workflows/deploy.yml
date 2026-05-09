@@ -56,4 +56,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Finalizar Trabajo
-        run: echo "Trabajo de CI completado exitosamente"
+        run: echo "Trabajo de CI completado exitosamente desde github actions"
