@@ -24,6 +24,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Cache de dependencias
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
       # Variable de GITHUB_ACTOR que contiene el nombre del usuario que ha iniciado la acción
       - name: Obtener usuario que acciona el push
         run: |
@@ -32,6 +40,18 @@ jobs:
 
       - name: Instalar dependencias
         run: npm ci
+
+      - name: Instalar Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Build aplicación
+        run: npm run build
+
+      - name: Deploy a Netlify
+        run: netlify deploy --prod --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_TOKEN }}
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
 
       - name: Finalizar Trabajo
         run: echo "Trabajo de CI completado exitosamente"
