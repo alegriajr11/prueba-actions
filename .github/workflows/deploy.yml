@@ -24,6 +24,12 @@ jobs:
         with:
           node-version: '20'
 
+      # Variable de GITHUB_ACTOR que contiene el nombre del usuario que ha iniciado la acción
+      - name: Obtener usuario que acciona el push
+        run: |
+          echo "Usuario que acciona el workflow: ${{ github.actor }}"
+          echo "Evento: ${{ github.event_name }}"
+
       - name: Instalar dependencias
         run: npm ci
 
