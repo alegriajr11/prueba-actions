@@ -1,1 +1,17 @@
+name: CI Angular App
 
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inicio de Trabajo
+        run: |
+          echo "Iniciando el trabajo de CI para la aplicación Angular"
+          echo "Verificando el entorno de ejecución"
