@@ -15,3 +15,20 @@ jobs:
         run: |
           echo "Iniciando el trabajo de CI para la aplicación Angular"
           echo "Verificando el entorno de ejecución"
+
+      - name: Checkout Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Ejecutar pruebas
+        run: npm test -- --watch=false --browsers=ChromeHeadlessCI
+
+      - name: Finalizar Trabajo
+        run: echo "Trabajo de CI completado exitosamente"
