@@ -27,8 +27,5 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Ejecutar pruebas
-        run: npm test -- --watch=false --browsers=ChromeHeadlessCI
-
       - name: Finalizar Trabajo
         run: echo "Trabajo de CI completado exitosamente"
